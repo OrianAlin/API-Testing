@@ -18,5 +18,13 @@ describe("Learn REST API Testing with Cypress", () => {
       .its("connection")
       .should("include", "keep-alive");
   });
-  it("API Tests - Status Code", () => {});
+  it("API Tests - Status Code", () => {
+    cy.request("/users/2").as("existingUser");
+    cy.get("@existingUser").its("status").should("equal", 200);
+
+    cy.request({ url: "/users/non-exist", failOnStatusCode: false }).as(
+      "nonExistingUser"
+    );
+    cy.get("@nonExistingUser").its("status").should("equal", 404);
+  });
 });
