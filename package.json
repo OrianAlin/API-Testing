@@ -1,0 +1,20 @@
+{
+  "name": "cypress-api-framework",
+  "version": "1.0.0",
+  "description": "Api Testing flow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "API",
+    "Automation",
+    "Cypress"
+  ],
+  "author": "Alin Orian",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^12.17.2"
+  }
+}
