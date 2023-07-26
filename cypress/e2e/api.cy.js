@@ -27,7 +27,7 @@ describe("Learn REST API Testing with Cypress", () => {
     );
     cy.get("@nonExistingUser").its("status").should("equal", 404);
   });
-  it.only("API Tests - GET request", () => {
+  it("API Tests - GET request", () => {
     cy.request({ url: "/users/2", method: "GET" }).as("user");
     cy.get("@user").then((res) => {
       cy.log(JSON.stringify(res.body));
@@ -37,6 +37,19 @@ describe("Learn REST API Testing with Cypress", () => {
 
       const userID = res.body.data.id;
       expect(userID).to.equal(2);
+    });
+  });
+  it.only("API Tests - POST request", () => {
+    cy.request({
+      url: "/login",
+      method: "POST",
+      body: { email: "eve.holt@reqres.in", password: "cityslicka" },
+    }).as("loginRequest");
+
+    cy.get("@loginRequest").its("status").should("equal", 200);
+    cy.get("@loginRequest").then((res) => {
+      cy.log(JSON.stringify(res.body));
+      expect(res.body.token).to.equal("QpwL5tke4Pnpja7X4");
     });
   });
 });
