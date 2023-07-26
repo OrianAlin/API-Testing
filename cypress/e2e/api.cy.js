@@ -39,7 +39,7 @@ describe("Learn REST API Testing with Cypress", () => {
       expect(userID).to.equal(2);
     });
   });
-  it.only("API Tests - POST request", () => {
+  it("API Tests - POST request", () => {
     cy.request({
       url: "/login",
       method: "POST",
@@ -50,6 +50,18 @@ describe("Learn REST API Testing with Cypress", () => {
     cy.get("@loginRequest").then((res) => {
       cy.log(JSON.stringify(res.body));
       expect(res.body.token).to.equal("QpwL5tke4Pnpja7X4");
+    });
+  });
+  it("API Tests - POST request - Error", () => {
+    cy.request({
+      url: "/login",
+      method: "POST",
+      failOnStatusCode: false,
+      body: { email: "eve.holt@reqres.in" },
+    }).as("loginRequest");
+    cy.get("@loginRequest").its("status").should("equal", 400);
+    cy.get("@loginRequest").then((res) => {
+      expect(res.body.error).to.equal("Missing password");
     });
   });
 });
