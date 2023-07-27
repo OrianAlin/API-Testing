@@ -68,7 +68,7 @@ describe("Learn REST API Testing with Cypress", () => {
     cy.request({ url: "/users/2", method: "DELETE" }).as("deleteUser");
     cy.get("@deleteUser").its("status").should("equal", 204);
   });
-  it("API Test - POST request", () => {
+  it("API Test - PUT request", () => {
     cy.request({
       url: "/api/users/2",
       method: "PUT",
